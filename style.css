@@ -17,7 +17,7 @@
 
   --safe-t: env(safe-area-inset-top, 0px);
   --safe-b: env(safe-area-inset-bottom, 0px);
-  color-scheme: light;
+  color-scheme: only light; /* stays light even when the phone is in dark mode */
 }
 
 * { box-sizing: border-box; }
