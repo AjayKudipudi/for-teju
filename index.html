@@ -35,6 +35,7 @@
     <div class="progress" id="progress" aria-hidden="true"></div>
 
     <div class="stage">
+      <!-- Bao's thoughts float up beside his head -->
       <div class="bubble" id="bubble" aria-live="polite">psst… it's me! 🐼</div>
       <div class="panda-wrap" id="pandaWrap">
         <svg class="panda" id="panda" data-mood="happy" viewBox="0 0 200 222" role="img" aria-label="Bao the panda">
@@ -83,6 +84,10 @@
 
             <g class="m-smile"><path d="M100 116 v4 M100 120 q-7 8 -14 2 M100 120 q7 8 14 2" class="line"/></g>
             <g class="m-sad"><path d="M88 132 q12 -10 24 0" class="line"/></g>
+            <g class="m-angry">
+              <path d="M58 72 L82 80" class="line-w"/><path d="M142 72 L118 80" class="line-w"/>
+              <path class="vein" d="M160 22 q6 0 6 -6 M172 16 q0 6 6 6 M178 28 q-6 0 -6 6 M166 34 q0 -6 -6 -6"/>
+            </g>
             <g class="m-shock"><ellipse cx="100" cy="128" rx="6" ry="8" class="ink"/></g>
 
             <g class="m-tears">
@@ -103,30 +108,45 @@
       </section>
 
       <section class="screen" data-step="q1">
-        <h2>First things first, do you love pandas?</h2>
-        <p class="sub">Choose wisely. I'm watching. 👀</p>
-        <div class="row">
-          <button class="btn btn-yes" id="q1Yes">Yes!! 🐼</button>
-          <button class="btn btn-no" id="q1No">No</button>
+        <h2>How much do you like <span data-you></span>? 🥰</h2>
+        <p class="sub" id="q1Sub">Be honest, Bao is listening 👀</p>
+        <div class="row stack">
+          <button class="btn btn-no" id="q1Small">Konchem 🤏</button>
+          <button class="btn btn-yes" id="q1Big">Chaaala 🫶</button>
         </div>
       </section>
 
       <section class="screen" data-step="q2">
-        <h2>Is <span data-you></span> the cutest developer you know?</h2>
-        <p class="sub">There is no wrong answer. Mostly.</p>
-        <div class="row">
-          <button class="btn btn-yes" id="q2a">Yes 😌</button>
-          <button class="btn btn-pink" id="q2b">Also yes 💯</button>
+        <h2>Do you smile when <span data-you></span>'s name pops up on your phone? 📱</h2>
+        <p class="sub">Be honest. Bao can tell 👀</p>
+        <div class="row stack">
+          <button class="btn btn-yes" id="smEvery">Every single time 🙈</button>
+          <button class="btn btn-pink" id="smSome">Only sometimes 🤏</button>
+          <button class="btn btn-no" id="smNever">Never 😐</button>
         </div>
       </section>
 
       <section class="screen" data-step="q3">
         <h2>Did you miss <span data-you></span> today?</h2>
         <p class="sub">Be honest, he can't see this. Probably.</p>
-        <div class="row" id="q3Row">
-          <button class="btn btn-yes" id="q3Yes">A lot 🥺</button>
+        <div class="row stack" id="q3Row">
+          <div class="slider" id="q3Slide" role="slider" tabindex="0" aria-label="Slide to say you missed him" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span class="slide-fill"></span>
+            <span class="slide-text">slide to say "a lot" ›››</span>
+            <span class="knob" aria-hidden="true">🐼</span>
+          </div>
           <button class="btn btn-no" id="q3No">No</button>
         </div>
+      </section>
+
+      <section class="screen" data-step="pretty">
+        <h2>Who's prettier, you or <span data-panda></span>? ✨</h2>
+        <p class="sub" id="prSub">Think carefully. He's very sensitive 🐼</p>
+        <div class="row">
+          <button class="btn btn-pink" id="prMe">Me, obviously 💅</button>
+          <button class="btn btn-no" id="prBao"><span data-panda></span> 🐼</button>
+        </div>
+        <div class="row"><button class="btn btn-yes" id="prNext" hidden>Hehe 💅</button></div>
       </section>
 
       <section class="screen" data-step="who">
@@ -134,7 +154,12 @@
         <p class="sub" id="whoSub">Choose carefully. <span data-panda></span> is keeping score 🐼</p>
         <div class="row">
           <button class="btn btn-pink" id="whoHer">I love <span data-you></span> more 💖</button>
-          <button class="btn btn-yes" id="whoHim"><span data-you></span> loves me more 💙</button>
+          <button class="flip" id="whoHim">
+            <span class="flip-inner">
+              <span class="face front"><span data-you></span> loves me more 💙</span>
+              <span class="face back">Truth? You both do 💞</span>
+            </span>
+          </button>
         </div>
         <div class="row"><button class="btn btn-yes" id="whoNext" hidden>Aww, okay 🥰</button></div>
       </section>
@@ -146,10 +171,15 @@
 
       <section class="screen" data-step="annoying">
         <h2>Okay, real talk. Is <span data-you></span> annoying sometimes?</h2>
-        <p class="sub">Take your time.</p>
-        <div class="row">
-          <button class="btn btn-no" id="annYes">Yes 😤</button>
+        <p class="sub" id="annSub">Think carefully. Bao is watching 👀</p>
+        <div class="row stack">
+          <div class="detector" id="annDet" aria-live="polite">
+            <span class="det-title">🔍 Bao's lie detector</span>
+            <div class="det-track"><span class="det-needle"></span></div>
+            <div class="det-ends"><span>LIE</span><span class="det-result" id="annDetRes">scanning…</span><span>TRUTH</span></div>
+          </div>
           <button class="btn btn-yes" id="annNo">No, he's perfect 😇</button>
+          <button class="btn btn-no" id="annYes">Yes 😤</button>
         </div>
       </section>
 
@@ -221,7 +251,13 @@
         <h2 class="yay">You said yes!!! 💍🐼</h2>
         <p class="sub" id="finalMsg"></p>
         <p class="stamp" id="stamp"></p>
-        <div class="row"><button class="btn btn-pink" id="replay">Play it again 🔁</button></div>
+        <div class="note" id="note">
+          <label for="noteText">Anything you want to say to <span data-you></span>? 💌</label>
+          <textarea id="noteText" rows="3" maxlength="1500" placeholder="Write anything… only he will read this 🐼"></textarea>
+          <button class="btn btn-yes" id="noteSend">Send to <span data-you></span> 💌</button>
+        </div>
+        <p class="note-done" id="noteDone" hidden>Sent 💖 <span data-you></span> will keep this forever</p>
+        <div class="row" id="replayRow" hidden><button class="btn btn-pink" id="replay">Play it again 🔁</button></div>
       </section>
     </div>
   </main>
