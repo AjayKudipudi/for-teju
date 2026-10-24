@@ -663,6 +663,9 @@ h2 {
 }
 .face.front { background: var(--bamboo-deep); color: #fff; }
 .face.back { background: var(--blush); color: var(--ink); transform: rotateY(180deg); }
+/* swap faces at the halfway point too, so it never relies on backface-visibility alone */
+.face.back, .flip.flipped .face.front { opacity: 0; transition: opacity 0s linear 160ms; }
+.flip.flipped .face.back { opacity: 1; }
 
 /* little hearts that burst out of a pressed "yes" */
 .burst {
